@@ -1,7 +1,17 @@
-import {TODO_TOGGLE} from './actions';
+const name = 'TODO_TOGGLE';
 
-const todoToggle = id => ({
-  type: TODO_TOGGLE,
+const action = id => ({
+  type: name,
   id
 });
-export default todoToggle;
+
+const handler = (state, id) => state.id === id
+  ? state.set('completed', !state.completed)
+  : state;
+
+export default action;
+
+export {
+  name,
+  handler
+};

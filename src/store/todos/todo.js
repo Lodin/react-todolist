@@ -1,7 +1,11 @@
 import {Map as ImmutableMap} from 'immutable';
-import {TODO_ADD, TODO_EDIT, TODO_MOVE, TODO_TOGGLE} from './actions';
+import * as todoAdd from './todo-add';
+import * as todoEdit from './todo-edit';
+import * as todoMove from './todo-move';
+import * as todoToggle from './todo-toggle';
 
 const initial = new ImmutableMap({
+  id: 0,
   title: '',
   description: '',
   categoryId: -1,
@@ -10,18 +14,14 @@ const initial = new ImmutableMap({
 
 const todo = (state = initial, action) => {
   switch (action.type) {
-    case TODO_ADD:
-      return state.withMutations((s) => {
-        s.set('title', action.title).set('categoryId', action.categoryId);
-      });
-    case TODO_EDIT:
-      return state.id === action.id ? state.withMutations((s) => {
-        s.set('title', action.title).set('description', action.description)
-      }) : state;
-    case TODO_MOVE:
-      return state.id === action.id ? state.set('categoryId', action.categoryId) : state;
-    case TODO_TOGGLE:
-      return state.id === action.id ? state.set('completed', !state.completed) : state;
+    case todoAdd.name:
+      return todoAdd.handler(state, action);
+    case todoEdit.name:
+      return todoEdit.handler(state, action);
+    case todoMove.name:
+      return todoMove.handler(state, action);
+    case todoToggle.name:
+      return todoToggle.handler(state, action);
     default:
       return state;
   }

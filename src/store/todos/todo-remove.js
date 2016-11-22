@@ -1,7 +1,15 @@
-import {TODO_REMOVE} from './actions';
+const name = 'TODO_REMOVE';
 
-const todoRemove = id => ({
-  type: TODO_REMOVE,
+const action = id => ({
+  type: name,
   id
 });
-export default todoRemove;
+
+const handler = (state, {id}) => state.filter(item => item.id !== id);
+
+export default action;
+
+export {
+  name,
+  handler
+};

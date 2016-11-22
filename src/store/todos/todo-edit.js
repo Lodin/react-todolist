@@ -1,10 +1,20 @@
-import {TODO_EDIT} from './actions';
+const name = 'TODO_EDIT';
 
-const todoEdit = (id, title, description, categoryId) => ({
-  type: TODO_EDIT,
+const action = (id, title, description) => ({
+  type: name,
   id,
   title,
-  description,
-  categoryId
+  description
 });
-export default todoEdit;
+
+const handler = (state, {payload: {id, title, description}}) => state.id === id
+  ? state.withMutations((s) => {
+    s.set('title', title).set('description', description)
+  })
+  : state;
+
+export default action;
+export {
+  name,
+  handler
+};

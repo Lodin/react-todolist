@@ -1,19 +1,23 @@
 import {List} from 'immutable';
 import todo from './todo';
-import {TODO_ADD, TODO_EDIT, TODO_MOVE, TODO_REMOVE, TODO_TOGGLE} from './actions';
+import * as todoAdd from './todo-add';
+import * as todoEdit from './todo-edit';
+import * as todoMove from './todo-move';
+import * as todoRemove from './todo-remove';
+import * as todoToggle from './todo-toggle';
 
 const initial = new List();
 
 const todos = (state = initial, action) => {
   switch (action.type) {
-    case TODO_ADD:
+    case todoAdd.name:
       return state.push(todo(undefined, action));
-    case TODO_EDIT:
-    case TODO_MOVE:
-    case TODO_TOGGLE:
+    case todoEdit.name:
+    case todoMove.name:
+    case todoToggle.name:
       return state.map(item => todo(item, action));
-    case TODO_REMOVE:
-      return state.filter(item => item.id === action.id);
+    case todoRemove.name:
+      return todoRemove.handler(state, action);
     default:
       return state;
   }
