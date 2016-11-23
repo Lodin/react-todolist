@@ -1,7 +1,7 @@
-const name = 'TODO_TOGGLE';
+const type = 'SUBTASK_TOGGLE';
 
 const action = id => ({
-  type: name,
+  type,
   id
 });
 
@@ -12,6 +12,6 @@ const handler = (state, id) => state.id === id
 export default action;
 
 export {
-  name,
+  type,
   handler
 };
