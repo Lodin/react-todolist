@@ -1,9 +1,10 @@
+import {v4 as createUuid} from 'node-uuid';
+
 const type = 'SUBTASK_ADD';
 
-let id = 0;
 const action = (title, taskId) => ({
   type,
-  id: id++,
+  id: createUuid(),
   title,
   taskId
 });

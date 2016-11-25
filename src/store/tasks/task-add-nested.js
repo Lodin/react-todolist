@@ -7,14 +7,11 @@ const action = parentId => ({
   parentId
 });
 
-const handler = (state, {parentId}) => {
-  const task = add(state, {});
-  return {
-    ...task,
-    title: `Nested Task #${task.id}`,
-    parentId
-  };
-};
+const handler = (state, {parentId}) => ({
+  ...add(state, {}),
+  title: 'Nested Task',
+  parentId
+});
 
 export default action;
 

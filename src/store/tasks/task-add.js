@@ -1,3 +1,5 @@
+import {v4 as createUuid} from 'node-uuid';
+
 const type = 'TASK_ADD';
 
 const action = title => ({
@@ -5,10 +7,9 @@ const action = title => ({
   title
 });
 
-let id = 0;
 const handler = (state, {title}) => ({
   ...state,
-  id: id++,
+  id: createUuid(),
   title
 });
 
