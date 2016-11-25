@@ -1,17 +1,21 @@
+%flex {
+  display: flex;
+}
+
 .container {
   padding: 20px 0;
 }
 
-.main {
-  display: flex;
+.row {
+  @extend %flex;
   justify-content: space-between;
 }
 
 .filter {
-  display: flex;
+  @extend %flex;
 }
 
-.logo {
+.title {
   font-size: 40px;
   font-weight: bold;
 }
