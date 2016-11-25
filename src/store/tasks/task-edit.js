@@ -7,7 +7,7 @@ const action = title => ({
 
 const handler = (state, {id, title}) =>
   state.id === id
-    ? state.set('title', title)
+    ? ({...state, title})
     : state;
 
 export default action;

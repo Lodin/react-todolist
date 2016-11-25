@@ -1,4 +1,4 @@
-import {handler as taskAddHandler} from './task-add';
+import {handler as add} from './task-add';
 
 const type = 'TASK_ADD_NESTED';
 
@@ -7,13 +7,14 @@ const action = parentId => ({
   parentId
 });
 
-const handler = (state, {parentId}) =>
-  taskAddHandler(state, {})
-    .withMutations((s) => {
-      s
-        .set('title', `Nested Task #${s.get('id')}`)
-        .set('parentId', parentId)
-    });
+const handler = (state, {parentId}) => {
+  const task = add(state, {});
+  return {
+    ...task,
+    title: `Nested Task #${task.id}`,
+    parentId
+  };
+};
 
 export default action;
 

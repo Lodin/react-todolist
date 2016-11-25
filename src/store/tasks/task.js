@@ -1,15 +1,14 @@
-import {Map as ImmutableMap} from 'immutable';
 import * as taskAdd from './task-add';
 import * as taskAddNested from './task-add-nested';
 import * as taskEdit from './task-edit';
 import * as taskToggle from './task-toggle';
 
-const initial = new ImmutableMap({
+const initial = {
   id: 0,
   title: '',
   parentId: null,
   expanded: false
-});
+};
 
 const task = (state = initial, action) => {
   switch (action.type) {

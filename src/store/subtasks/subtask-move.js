@@ -8,7 +8,7 @@ const action = (id, taskId) => ({
 
 const handler = (state, {id, taskId}) =>
   state.id === id
-    ? state.set('taskId', taskId)
+    ? {...state, taskId}
     : state;
 
 export default action;

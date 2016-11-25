@@ -8,13 +8,14 @@ const action = (id, title, description, completed) => ({
   completed
 });
 
-const handler = (state, {payload: {id, title, description, completed}}) =>
-  state.id === id ? state.withMutations((s) => {
-    s
-      .set('title', title)
-      .set('description', description)
-      .set('completed', completed);
-  }) : state;
+const handler = (state, {id, title, description, completed}) =>
+  state.id === id ? {
+    ...state,
+    id,
+    title,
+    description,
+    completed
+  } : state;
 
 export default action;
 export {

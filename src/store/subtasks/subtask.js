@@ -1,16 +1,15 @@
-import {Map as ImmutableMap} from 'immutable';
 import * as subtaskAdd from './subtask-add';
 import * as subtaskEdit from './subtask-edit';
 import * as subtaskMove from './subtask-move';
 import * as subtaskToggle from './subtask-toggle';
 
-const initial = new ImmutableMap({
+const initial = {
   id: 0,
   title: '',
   description: '',
-  categoryId: -1,
+  taskId: -1,
   completed: false
-});
+};
 
 const subtask = (state = initial, action) => {
   switch (action.type) {

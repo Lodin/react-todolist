@@ -6,7 +6,7 @@ const action = id => ({
 });
 
 const handler = (state, id) => state.id === id
-  ? state.set('completed', !state.completed)
+  ? {...state, completed: !state.completed}
   : state;
 
 export default action;

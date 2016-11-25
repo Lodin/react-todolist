@@ -8,13 +8,12 @@ const action = (title, taskId) => ({
   taskId
 });
 
-const handler = (state, {id, title, taskId}) =>
-  state.withMutations((s) => {
-    s
-      .set('id', id)
-      .set('title', title)
-      .set('taskId', taskId);
-  });
+const handler = (state, {id, title, taskId}) => ({
+  ...state,
+  id,
+  title,
+  taskId
+});
 
 export default action;
 

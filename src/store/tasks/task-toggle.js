@@ -7,7 +7,7 @@ const action = id => ({
 
 const handler = (state, {id}) =>
   state.id === id
-    ? state.set('expanded', !state.get('expanded'))
+    ? ({...state, expanded: !state.expanded})
     : state;
 
 export default action;
