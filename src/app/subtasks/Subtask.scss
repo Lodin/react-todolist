@@ -1,0 +1,21 @@
+%flex {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  @extend %flex;
+  justify-content: space-between;
+}
+
+.main {
+  @extend %flex;
+}
+
+.actions {
+  @extend %flex;
+}
+
+.icon-button {
+  margin-right: 40px;
+}
