@@ -1,0 +1,32 @@
+%flex {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  @extend %flex;
+}
+
+.actions {
+  @extend %flex;
+}
+
+.title {
+  margin-right: 20px;
+}
+
+.icon-button-wrapper {
+  position: relative;
+  margin-right: 40px;
+}
+
+.icon-button {
+  position: absolute;
+  top: -(32px / 2);
+  left: -(32px / 2);
+}
