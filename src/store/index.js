@@ -7,30 +7,31 @@ import subtasks from './subtasks';
 import tasks from './tasks';
 import {saveState, loadState} from './utils/storage';
 
-const middleware = applyMiddleware(
-  routerMiddleware(browserHistory)
-);
+const configureStore = () => {
+  const middleware = applyMiddleware(
+    routerMiddleware(browserHistory)
+  );
 
-const store = createStore(
-  combineReducers({
-    routing: routerReducer,
-    subtasks,
-    tasks
-  }),
-  loadState(),
-  composeWithDevTools(middleware)
-);
+  const store = createStore(
+    combineReducers({
+      routing: routerReducer,
+      subtasks,
+      tasks
+    }),
+    loadState(),
+    composeWithDevTools(middleware)
+  );
 
-store.subscribe(throttle(() => {
-  saveState({
-    tasks: store.getState().tasks,
-    subtasks: store.getState().subtasks
-  })
-}, 1000));
+  store.subscribe(throttle(() => {
+    saveState({
+      tasks: store.getState().tasks,
+      subtasks: store.getState().subtasks
+    })
+  }, 1000));
 
-const history = syncHistoryWithStore(browserHistory, store);
+  const history = syncHistoryWithStore(browserHistory, store);
 
-export {
-  store,
-  history
-}
+  return {store, history};
+};
+
+export default configureStore;
