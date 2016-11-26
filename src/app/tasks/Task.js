@@ -9,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import taskAddNested from '../../store/tasks/task-add-nested';
 import taskEdit from '../../store/tasks/task-edit';
 import taskRemove from '../../store/tasks/task-remove';
+import {isEnterKey} from '../../utils/checkers';
 import styles from './Task.scss';
 
 const btnStyles = {
@@ -64,7 +65,13 @@ class Task extends Component {
               <TextField
                 name={`task-title-${this.props.id}`}
                 value={this.state.title}
-                onChange={this.onInput}/>
+                onChange={this.onInput}
+                onKeyUp={
+                  event =>
+                    isEnterKey(event.keyCode)
+                      ? this.onChangeEdit()
+                      : null
+                }/>
             ) : this.state.title
           }</div>
           <div className={styles.iconButtonWrapper}>

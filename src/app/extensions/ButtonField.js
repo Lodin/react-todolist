@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import {isEnterKey} from '../../utils/checkers';
 import styles from './ButtonField.scss';
 
 /**
@@ -32,7 +33,13 @@ class ButtonField extends Component {
             hintText={this.props.placeholder}
             name={this.props.name}
             value={this.state.value}
-            onChange={this.onInput} />
+            onChange={this.onInput}
+            onKeyUp={
+              event =>
+                isEnterKey(event.keyCode)
+                  ? this.onAdd()
+                  : null
+            }/>
         </div>
         <div>
           <FlatButton
