@@ -8,19 +8,20 @@ import styles from './Subtasks.scss';
 const Subtasks = ({subtasks, params: {taskId}}) => (
   <div className={styles.container}>
     <div className={styles.add}>
-      <SubtaskAddField taskId={parseInt(taskId, 10)}/>
+      <SubtaskAddField taskId={taskId}/>
     </div>
     <div className={styles.list}>
       <List>
         {
           subtasks
-            .filter(subtask => subtask.taskId === parseInt(taskId, 10))
+            .filter(subtask => subtask.taskId === taskId)
             .map(subtask => (
               <ListItem key={subtask.id}>
                 <Subtask
                   id={subtask.id}
                   taskId={taskId}
-                  title={subtask.title}/>
+                  title={subtask.title}
+                  isCompleted={subtask.completed}/>
               </ListItem>
             ))
         }
