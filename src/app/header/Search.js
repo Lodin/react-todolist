@@ -1,20 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import query from '../../store/location/query';
 import ClearableTextField from '../extensions/ClearableTextField';
 
-const Search = ({onEnter, onCancel}) => (
+const Search = ({location, onEnter, onCancel}) => (
   <ClearableTextField
     name="search"
-    onEnter={onEnter}
-    onCancel={onCancel} />
+    value={location.query.q}
+    onEnter={search => onEnter(location, search)}
+    onCancel={() => onCancel(location)} />
 );
 
 const SearchConnected = connect(
-  null,
+  state => ({
+    location: state.routing.locationBeforeTransitions
+  }),
   dispatch => ({
-    onEnter: searchText => dispatch(push(`/filter/${searchText}`)),
-    onCancel: () => dispatch(push('/tasks'))
+    onEnter: (location, search) => dispatch(push(query(location, ['q', search]))),
+    onCancel: location => dispatch(push(query(location, ['q', undefined])))
   })
 )(Search);
 

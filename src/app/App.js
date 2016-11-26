@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import {Router, Route, IndexRoute, Redirect} from 'react-router';
+import {Router, Route, Redirect} from 'react-router';
 
 import SubtaskEdit from './subtask-edit/SubtaskEdit';
 import Subtasks from './subtasks/Subtasks';
@@ -16,9 +16,6 @@ class App extends Component {
         <Route path="tasks" component={Tasks}>
           <Route path=":taskId" component={Subtasks}/>
           <Route path=":taskId/subtask/:subtaskId" component={SubtaskEdit}/>
-        </Route>
-        <Route path="search/:search" component={Tasks}>
-          <IndexRoute component={Subtasks}/>
         </Route>
       </Route>
     </Router>

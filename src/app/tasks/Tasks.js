@@ -2,18 +2,49 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {List, ListItem} from 'material-ui/List';
+import path from '../../store/location/path';
+import subtaskHasText from '../../store/subtasks/utils/subtask-has-text';
 import Task from './Task';
 import TaskAddField from './TaskAddField';
 import styles from './Tasks.scss';
 
 class Tasks extends Component {
-  fill(id = null) {
+  hasIncompletedSubtasks(taskId) {
+    return this.props.subtasks
+      .reduce((acc, subtask) =>
+        subtask.taskId === taskId && !subtask.completed
+          ? acc + 1
+          : acc, 0) > 0;
+  }
+
+  hasMatchingSubtasks(taskId) {
+    return this.props.subtasks
+      .reduce((acc, subtask) =>
+        subtask.taskId === taskId && subtaskHasText(subtask, this.props.location.query.q)
+          ? acc + 1
+          : acc, 0) > 0;
+  }
+
+  filter(id) {
+    const incompleted = this.props.location.query.incompleted;
+    const search = this.props.location.query.q;
+
     return this.props.tasks
-      .filter(task => task.parentId === id)
+      .filter(task =>
+        task.parentId === id
+        && (incompleted ? this.hasIncompletedSubtasks(task.id) : true)
+        && (search
+          ? (task.title.search(search) !== -1 || this.hasMatchingSubtasks(task.id))
+          : true)
+      );
+  }
+
+  fill(id = null) {
+    return this.filter(id)
       .map(task =>
         <ListItem
           key={task.id}
-          onClick={() => this.props.onSelect(task.id)}
+          onClick={() => this.props.onSelect(this.props.location, task.id)}
           nestedItems={this.fill(task.id)}>
           <Task
             id={task.id}
@@ -45,10 +76,11 @@ class Tasks extends Component {
 
 const TasksConnected = connect(
   state => ({
-    tasks: state.tasks
+    tasks: state.tasks,
+    subtasks: state.subtasks
   }),
   dispatch => ({
-    onSelect: id => dispatch(push(`/tasks/${id}`))
+    onSelect: (location, id) => dispatch(push(path(location, `/tasks/${id}`)))
   })
 )(Tasks);
 

@@ -11,7 +11,7 @@ import styles from './ClearableTextField.scss';
 class ClearableTextField extends Component {
   constructor(props) {
     super(props);
-    this.state = {search: ''};
+    this.state = {search: this.props.value || ''};
 
     this.onInput = ::this.onInput;
     this.onCancel = ::this.onCancel;

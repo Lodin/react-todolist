@@ -1,5 +1,5 @@
 import React from 'react';
-import ActiveFilter from './ActiveFilter';
+import FilterIncompleted from './FilterIncompleted';
 import ProgressBar from './ProgressBar';
 import Search from './Search';
 import styles from './Header.scss';
@@ -9,7 +9,7 @@ const Header = () => (
     <div className={styles.row}>
       <div className={styles.title}>To-Do List</div>
       <div className={styles.filter}>
-        <ActiveFilter />
+        <FilterIncompleted />
         <Search />
       </div>
     </div>
