@@ -5,7 +5,7 @@ const action = id => ({
   id
 });
 
-const handler = (state, id) => state.id === id
+const handler = (state, {id}) => state.id === id
   ? {...state, completed: !state.completed}
   : state;
 

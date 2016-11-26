@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.completed {
+  color: #999;
+}
+
 .main {
   @extend %flex;
 }
@@ -18,4 +22,10 @@
 
 .icon-button {
   margin-right: 40px;
+}
+
+.title {
+  .completed & {
+    text-decoration: line-through;
+  }
 }
