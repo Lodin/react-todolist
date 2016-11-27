@@ -44,7 +44,7 @@ class Tasks extends Component {
       .map(task =>
         <ListItem
           key={task.id}
-          onClick={() => this.props.onSelect(this.props.location, task.id)}
+          onClick={() => this.props.onSelect(task.id)}
           nestedItems={this.fill(task.id)}>
           <Task
             id={task.id}
@@ -79,8 +79,8 @@ const TasksConnected = connect(
     tasks: state.tasks,
     subtasks: state.subtasks
   }),
-  dispatch => ({
-    onSelect: (location, id) => dispatch(push(path(location, `/tasks/${id}`)))
+  (dispatch, {location}) => ({
+    onSelect: id => dispatch(push(path(location, `/tasks/${id}`)))
   })
 )(Tasks);
 

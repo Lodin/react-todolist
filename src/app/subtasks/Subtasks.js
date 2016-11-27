@@ -6,7 +6,7 @@ import Subtask from './Subtask';
 import SubtaskAddField from './SubtaskAddField';
 import styles from './Subtasks.scss';
 
-const Subtasks = ({subtasks, params: {taskId}, location}) => (
+const Subtasks = ({subtasks, params: {taskId}, location: {query}}) => (
   <div className={styles.container}>
     <div className={styles.add}>
       <SubtaskAddField taskId={taskId}/>
@@ -17,8 +17,8 @@ const Subtasks = ({subtasks, params: {taskId}, location}) => (
           subtasks
             .filter(subtask =>
               subtask.taskId === taskId
-              && (location.query.incompleted ? !subtask.completed : true)
-              && (location.query.q ? subtaskHasText(location.query.q) : true)
+              && (query.incompleted ? !subtask.completed : true)
+              && (query.q ? subtaskHasText(query.q) : true)
             )
             .map(subtask => (
               <ListItem key={subtask.id}>
