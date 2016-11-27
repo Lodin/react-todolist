@@ -48,7 +48,8 @@ class Tasks extends Component {
           nestedItems={this.fill(task.id)}>
           <Task
             id={task.id}
-            title={task.title}/>
+            title={task.title}
+            routeParams={this.props.params}/>
         </ListItem>
       );
   }
